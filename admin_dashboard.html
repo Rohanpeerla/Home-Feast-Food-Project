@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}HomeFeast Admin{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Admin Dashboard</h1>
+      <p class="page-subtitle">Approve cooks, watch demand, and keep the marketplace tidy.</p>
+    </div>
+  </div>
+
+  <div class="section-grid" style="margin-top: 1.25rem;">
+    <div class="summary-box">
+      <div class="summary-label">Registered users</div>
+      <div class="summary-value">{{ stats.users }}</div>
+    </div>
+    <div class="summary-box">
+      <div class="summary-label">Approved cooks</div>
+      <div class="summary-value">{{ stats.cooks }}</div>
+    </div>
+    <div class="summary-box">
+      <div class="summary-label">Pending approvals</div>
+      <div class="summary-value">{{ stats.pending_cooks }}</div>
+    </div>
+    <div class="summary-box">
+      <div class="summary-label">Orders processed</div>
+      <div class="summary-value">{{ stats.orders }}</div>
+    </div>
+    <div class="summary-box">
+      <div class="summary-label">Active subscriptions</div>
+      <div class="summary-value">{{ stats.subscriptions }}</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="page-header">
+    <div>
+      <h2 class="section-title">Pending cook registrations</h2>
+      <p class="page-subtitle">New cooks stay here until you approve them.</p>
+    </div>
+  </div>
+
+  <div class="grid-list">
+    {% for cook in pending_cooks %}
+      <div class="card" style="padding:1.25rem;">
+        <div style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:flex-start;">
+          <div>
+            <h3 style="margin:0 0 .35rem;">{{ cook.name }}</h3>
+            <div class="page-subtitle">{{ cook.location }} | {{ cook.cuisines }} | {{ cook.meal_types }}</div>
+            <div class="page-subtitle">{{ cook.service_area or "Service area not provided" }}</div>
+            <div class="page-subtitle">{{ cook.delivery_times or "Delivery times not provided" }}</div>
+            <div class="page-subtitle">{{ cook.plan_notes or "Plan notes not provided" }}</div>
+          </div>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+            <form method="post" action="{{ url_for('approve_cook', cook_id=cook.id) }}">
+              <button class="btn-primary" type="submit">Approve</button>
+            </form>
+            <form method="post" action="{{ url_for('reject_cook', cook_id=cook.id) }}">
+              <button class="btn" type="submit">Reject</button>
+            </form>
+          </div>
+        </div>
+        <p class="page-subtitle" style="margin-top:1rem;">{{ cook.description }}</p>
+      </div>
+    {% else %}
+      <div class="card" style="padding:1.25rem;">No pending registrations right now.</div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="page-header">
+    <div>
+      <h2 class="section-title">Recent orders</h2>
+      <p class="page-subtitle">Keep an eye on the subscription flow and order health.</p>
+    </div>
+  </div>
+
+  <div class="grid-list">
+    {% for order in recent_orders %}
+      <div class="card" style="padding:1rem 1.25rem;">
+        <strong>{{ order.meal_name }}</strong>
+        <div class="page-subtitle">{{ order.user_name }} | {{ order.cook_name }} | {{ order.meal_type }} | {{ order.status|capitalize }}</div>
+        <div class="page-subtitle">Amount: ₹{{ order.amount }} | Scheduled: {{ order.scheduled_for or "n/a" }}</div>
+      </div>
+    {% else %}
+      <div class="card" style="padding:1.25rem;">No orders yet.</div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="page-header">
+    <div>
+      <h2 class="section-title">Users</h2>
+      <p class="page-subtitle">The demo admin can see all registered accounts here.</p>
+    </div>
+  </div>
+
+  <div class="grid-list">
+    {% for account in users %}
+      <div class="card" style="padding:1rem 1.25rem;">
+        <strong>{{ account.name }}</strong>
+        <div class="page-subtitle">{{ account.email }} | {{ account.phone or "No phone" }}</div>
+        <div class="page-subtitle">{{ account.meal_pref or "No meal preference" }} | {{ account.cuisine_pref or "No cuisine preference" }}</div>
+        {% if account.is_admin %}
+          <div class="page-subtitle">Admin account</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div style="margin-top: 1.5rem;">
+    <a class="btn-primary" href="{{ url_for('dashboard') }}">Back to user dashboard</a>
+  </div>
+</section>
+{% endblock %}

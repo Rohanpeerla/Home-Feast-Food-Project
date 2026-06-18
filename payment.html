@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Payment | HomeFeast{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="form-block">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Payment for Subscription</h1>
+        <p class="page-subtitle">{{ cook.name }} | {{ cook.cuisines }} | {{ cook.location }}</p>
+      </div>
+    </div>
+
+    <div class="card" style="padding:1.5rem; margin-bottom:1.5rem;">
+      <h2 class="section-title" style="margin-top:0;">{{ cook.name }} - {{ plan.capitalize() }} Plan</h2>
+      <p class="page-subtitle">Starting price per day: <strong>₹{{ cook.price_from }}</strong></p>
+      <p class="page-subtitle" style="font-size:1.2rem; margin-top:1rem;">
+        Total amount:
+        <strong class="page-title" style="font-size:1.5rem; display:inline;">
+          {% if plan == 'daily' %}
+            ₹{{ cook.price_from }}
+          {% elif plan == 'weekly' %}
+            ₹{{ cook.price_from * 7 }}
+          {% else %}
+            ₹{{ cook.price_from * 25 }}
+          {% endif %}
+        </strong>
+      </p>
+    </div>
+
+    <div class="card" style="padding:1.5rem;">
+      <h2 class="section-title" style="margin-top:0;">Choose Payment Method</h2>
+      <form method="post" action="{{ url_for('confirm_payment', cook_id=cook.id) }}">
+        <div class="grid-list">
+          <label class="card" style="display:flex; gap:1rem; align-items:flex-start; cursor:pointer;">
+            <input type="radio" name="method" value="upi" checked style="width:auto; margin-top:0.35rem;">
+            <div>
+              <div class="menu-item-title">UPI Payment</div>
+              <div class="menu-item-desc">Google Pay, PhonePe, Paytm, etc.</div>
+            </div>
+          </label>
+          <label class="card" style="display:flex; gap:1rem; align-items:flex-start; cursor:pointer;">
+            <input type="radio" name="method" value="card" style="width:auto; margin-top:0.35rem;">
+            <div>
+              <div class="menu-item-title">Debit / Credit Card</div>
+              <div class="menu-item-desc">Visa, Mastercard, RuPay</div>
+            </div>
+          </label>
+          <label class="card" style="display:flex; gap:1rem; align-items:flex-start; cursor:pointer;">
+            <input type="radio" name="method" value="wallet" style="width:auto; margin-top:0.35rem;">
+            <div>
+              <div class="menu-item-title">Digital Wallet</div>
+              <div class="menu-item-desc">Paytm, Amazon Pay, Mobikwik</div>
+            </div>
+          </label>
+          <label class="card" style="display:flex; gap:1rem; align-items:flex-start; cursor:pointer;">
+            <input type="radio" name="method" value="bank" style="width:auto; margin-top:0.35rem;">
+            <div>
+              <div class="menu-item-title">Net Banking</div>
+              <div class="menu-item-desc">Direct bank transfer</div>
+            </div>
+          </label>
+          <label class="card" style="display:flex; gap:1rem; align-items:flex-start; cursor:pointer;">
+            <input type="radio" name="method" value="cod" style="width:auto; margin-top:0.35rem;">
+            <div>
+              <div class="menu-item-title">Cash on Delivery</div>
+              <div class="menu-item-desc">Pay when food is delivered</div>
+            </div>
+          </label>
+        </div>
+
+        <input type="hidden" name="plan" value="{{ plan }}">
+
+        <div class="form-actions" style="margin-top:1.25rem;">
+          <button type="button" class="btn-secondary" onclick="history.back()">Cancel</button>
+          <button type="submit" class="btn-primary">Proceed to Pay</button>
+        </div>
+      </form>
+    </div>
+
+    <p class="auth-note" style="margin-top:1.25rem;">
+      <a href="{{ url_for('cook_dashboard', cook_id=cook.id) }}">Back to cook profile</a>
+    </p>
+  </div>
+</section>
+{% endblock %}

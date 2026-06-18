@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HomeFeast – Homemade Tiffin & Food Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --saffron: #C8552D;
+    --saffron-light: #FFE9D6;
+    --saffron-dark: #9B3E20;
+    --green: #3D7A52;
+    --green-light: #E9F4EC;
+    --cream: #FFF8ED;
+    --warm-white: #FFFDF8;
+    --charcoal: #231B16;
+    --text-mid: #51463E;
+    --text-muted: #7A6C61;
+    --border: #EADFCF;
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--charcoal);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255, 248, 237, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 66px;
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--charcoal); text-decoration: none;
+  }
+
+  .nav-logo .dot { color: var(--saffron); }
+
+  .nav-logo-icon {
+    width: 38px; height: 38px; background: var(--saffron);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none; color: var(--text-mid);
+    font-size: 0.9rem; font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--saffron); }
+
+  .nav-cta {
+    background: var(--saffron); color: #fff !important;
+    padding: 0.5rem 1.25rem; border-radius: var(--radius-sm) !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--saffron-dark) !important; color: #fff !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--cream);
+    display: flex; align-items: center;
+    padding: 100px 5% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.07;
+    background: var(--saffron);
+    pointer-events: none;
+  }
+
+  .hero-bg-circle.c1 { width: 500px; height: 500px; top: -100px; right: -100px; }
+  .hero-bg-circle.c2 { width: 300px; height: 300px; bottom: 0; left: -80px; }
+
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+    max-width: 1200px; margin: 0 auto; width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--saffron-light);
+    color: var(--saffron-dark);
+    padding: 5px 14px; border-radius: 999px;
+    font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.03em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-badge span { width: 6px; height: 6px; background: var(--saffron); border-radius: 50%; }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 4vw, 3.5rem);
+    line-height: 1.15;
+    color: var(--charcoal);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--saffron);
+  }
+
+  .hero p {
+    font-size: 1.05rem; color: var(--text-mid);
+    max-width: 480px; margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--saffron); color: #fff;
+    padding: 0.85rem 1.8rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem; font-weight: 600;
+    border: none; cursor: pointer;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--saffron-dark); transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent; color: var(--charcoal);
+    padding: 0.85rem 1.8rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem; font-weight: 600;
+    border: 1.5px solid var(--border);
+    cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--saffron); background: var(--saffron-light); }
+
+  .hero-stats {
+    display: flex; gap: 2rem; margin-top: 2.5rem;
+    padding-top: 2rem; border-top: 1px solid var(--border);
+  }
+
+  .hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 700; color: var(--charcoal);
+  }
+
+  .hero-stat-label { font-size: 0.8rem; color: var(--text-muted); }
+
+  .hero-visual {
+    display: grid; gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+  }
+
+  .food-card {
+    background: #fff;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+
+  .food-card:hover { transform: translateY(-4px); }
+
+  .food-card-img {
+    height: 130px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem;
+  }
+
+  .food-card.a .food-card-img { background: #FFF1DC; }
+  .food-card.b .food-card-img { background: #E9F4EC; }
+  .food-card.c .food-card-img { background: #FFE7DF; }
+  .food-card.d .food-card-img { background: #EAF1E6; }
+
+  .food-card-body { padding: 12px 14px; }
+
+  .food-card-name {
+    font-size: 0.9rem; font-weight: 600; color: var(--charcoal);
+    margin-bottom: 2px;
+  }
+
+  .food-card-sub {
+    font-size: 0.75rem; color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .food-card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .food-price { font-weight: 700; color: var(--saffron); font-size: 0.95rem; }
+
+  .veg-dot {
+    width: 14px; height: 14px;
+    border-radius: 3px;
+    border: 1.5px solid var(--green);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .veg-dot span {
+    width: 6px; height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+  }
+
+  .nonveg-dot {
+    width: 14px; height: 14px;
+    border-radius: 3px;
+    border: 1.5px solid #9f3527;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .nonveg-dot span {
+    width: 6px; height: 6px;
+    background: #9f3527;
+    border-radius: 50%;
+  }
+
+  .rating {
+    display: flex; align-items: center; gap: 3px;
+    background: var(--saffron-light);
+    color: var(--saffron-dark);
+    font-size: 0.72rem; font-weight: 600;
+    padding: 2px 7px; border-radius: 999px;
+  }
+
+  section { padding: 80px 5%; }
+
+  .section-label {
+    font-size: 0.78rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--saffron); margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    line-height: 1.2;
+    color: var(--charcoal);
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    color: var(--text-muted); font-size: 1rem;
+    max-width: 520px; line-height: 1.7;
+  }
+
+  .section-head { margin-bottom: 3rem; }
+  .section-head.center { text-align: center; }
+  .section-head.center .section-sub { margin: 0 auto; }
+
+  .how-section { background: var(--cream); }
+
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .step-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem 1.5rem;
+    position: relative;
+  }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; font-weight: 700;
+    color: var(--saffron-light);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .step-icon {
+    font-size: 1.8rem; margin-bottom: 0.75rem;
+  }
+
+  .step-title {
+    font-size: 1rem; font-weight: 600;
+    color: var(--charcoal); margin-bottom: 0.4rem;
+  }
+
+  .step-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+
+  .cooks-section { background: var(--warm-white); }
+
+  .cooks-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .cook-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+
+  .cook-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+  }
+
+  .cook-avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    font-size: 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .cook-name { font-size: 1rem; font-weight: 600; color: var(--charcoal); margin-bottom: 2px; }
+  .cook-location { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+
+  .cook-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+
+  .tag {
+    font-size: 0.72rem; font-weight: 500;
+    padding: 3px 10px; border-radius: 999px;
+    background: var(--saffron-light); color: var(--saffron-dark);
+  }
+
+  .tag.green { background: var(--green-light); color: var(--green); }
+
+  .cook-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 0.75rem; border-top: 1px solid var(--border);
+  }
+
+  .cook-plan { font-size: 0.8rem; color: var(--text-muted); }
+  .cook-plan strong { color: var(--charcoal); }
+
+  .plans-section { background: var(--cream); }
+
+  .plans-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem; max-width: 900px; margin: 0 auto;
+  }
+
+  .plan-card {
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem 1.75rem;
+    position: relative; text-align: center;
+    transition: transform 0.2s;
+  }
+
+  .plan-card:hover { transform: translateY(-3px); }
+
+  .plan-card.featured {
+    border-color: var(--saffron);
+    background: linear-gradient(160deg, #FFF1DC 0%, #fff 100%);
+  }
+
+  .plan-featured-badge {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--saffron); color: #fff;
+    font-size: 0.72rem; font-weight: 700;
+    padding: 4px 14px; border-radius: 999px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+
+  .plan-emoji { font-size: 2.2rem; margin-bottom: 0.75rem; }
+  .plan-name { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 0.5rem; }
+
+  .plan-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 700; color: var(--charcoal);
+    line-height: 1;
+  }
+
+  .plan-price span { font-size: 1rem; color: var(--text-muted); font-family: 'DM Sans', sans-serif; }
+
+  .plan-desc { font-size: 0.85rem; color: var(--text-muted); margin: 0.75rem 0 1.25rem; }
+
+  .plan-features { list-style: none; text-align: left; margin-bottom: 1.5rem; }
+
+  .plan-features li {
+    font-size: 0.875rem; color: var(--text-mid);
+    padding: 5px 0;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .plan-features li::before {
+    content: "✓"; color: var(--green);
+    font-weight: 700; font-size: 0.8rem;
+  }
+
+  .btn-plan {
+    width: 100%; padding: 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem; font-weight: 600;
+    cursor: pointer; border: 1.5px solid var(--saffron);
+    background: transparent; color: var(--saffron);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .btn-plan:hover, .plan-card.featured .btn-plan {
+    background: var(--saffron); color: #fff;
+  }
+
+  .features-section { background: var(--warm-white); }
+
+  .features-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .feature-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.25rem;
+    background: #fff; border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .feature-icon-box {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem; flex-shrink: 0;
+  }
+
+  .feature-icon-box.saffron { background: var(--saffron-light); }
+  .feature-icon-box.green { background: var(--green-light); }
+
+  .feature-title { font-size: 0.95rem; font-weight: 600; color: var(--charcoal); margin-bottom: 4px; }
+  .feature-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+
+  .testimonials-section { background: var(--cream); }
+
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .testimonial-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.5rem;
+  }
+
+  .testimonial-stars { color: var(--saffron); font-size: 0.9rem; margin-bottom: 0.75rem; letter-spacing: 2px; }
+  .testimonial-text { font-size: 0.9rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 1.25rem; font-style: italic; }
+
+  .testimonial-author { display: flex; align-items: center; gap: 10px; }
+
+  .testimonial-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    font-size: 1.1rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .testimonial-name { font-size: 0.875rem; font-weight: 600; color: var(--charcoal); }
+  .testimonial-role { font-size: 0.75rem; color: var(--text-muted); }
+
+  .cta-section {
+    background: var(--charcoal);
+    padding: 80px 5%;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+    width: 400px; height: 400px;
+    background: var(--saffron); border-radius: 50%; opacity: 0.06;
+  }
+
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    color: #fff; margin-bottom: 1rem;
+  }
+
+  .cta-section p { color: #a8a29e; max-width: 480px; margin: 0 auto 2rem; font-size: 1rem; }
+
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  .btn-cta-white {
+    background: #fff; color: var(--charcoal);
+    padding: 0.85rem 2rem; border-radius: var(--radius-sm);
+    font-size: 0.95rem; font-weight: 600; border: none;
+    cursor: pointer; text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+
+  .btn-cta-white:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  .btn-cta-ghost {
+    background: transparent; color: #fff;
+    padding: 0.85rem 2rem; border-radius: var(--radius-sm);
+    font-size: 0.95rem; font-weight: 600;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s;
+  }
+
+  .btn-cta-ghost:hover { border-color: rgba(255,255,255,0.7); }
+
+  footer {
+    background: #111; color: #a8a29e;
+    padding: 50px 5% 30px;
+  }
+
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 3rem;
+  }
+
+  .footer-brand .nav-logo { color: #fff; margin-bottom: 0.75rem; display: block; }
+  .footer-brand p { font-size: 0.85rem; line-height: 1.6; color: #78716c; max-width: 240px; }
+
+  .footer-col h4 { color: #e7e5e0; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.5rem; }
+  .footer-col ul a { color: #78716c; text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--saffron); }
+
+  .footer-bottom {
+    border-top: 1px solid #292524;
+    padding-top: 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.8rem; color: #57534e;
+  }
+
+  .search-bar {
+    display: flex; gap: 0; margin-top: 2rem;
+    background: #fff; border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm); overflow: hidden;
+    max-width: 440px;
+  }
+
+  .search-bar input {
+    flex: 1; padding: 0.75rem 1rem;
+    border: none; outline: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; color: var(--charcoal);
+    background: transparent;
+  }
+
+  .search-bar button {
+    background: var(--saffron); color: #fff;
+    border: none; padding: 0 1.25rem;
+    font-size: 0.9rem; font-weight: 600;
+    cursor: pointer; font-family: 'DM Sans',sans-serif;
+    transition: background 0.2s;
+  }
+
+  .search-bar button:hover { background: var(--saffron-dark); }
+
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-visual { display: grid; grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .hero { padding-top: 90px; }
+  }
+
+  @media (max-width: 480px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.25rem; }
+    .hero-actions { flex-direction: column; }
+    .search-bar { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="nav-logo" href="{{ url_for('home') }}">
+    <div class="nav-logo-icon">🍱</div>
+    HomeFeast<span class="dot">.</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#cooks">Find Cooks</a></li>
+    <li><a href="#plans">Meal Plans</a></li>
+    {% if user %}
+      <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+      <li><a href="{{ url_for('logout') }}" class="nav-cta">Logout</a></li>
+    {% else %}
+      <li><a href="{{ url_for('login') }}" class="nav-cta">Login</a></li>
+    {% endif %}
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-badge"><span></span> Homemade · Hygienic · Affordable</div>
+      <h1>Fresh <em>home-cooked</em> meals, delivered to your door</h1>
+      <p>Connect with verified local home cooks for daily, weekly, or monthly tiffin subscriptions. Real food, real flavors — just like home.</p>
+      <div class="search-bar">
+        <input type="text" placeholder="Enter your area or pincode…" />
+        <button>Search</button>
+      </div>
+      <div class="hero-actions" style="margin-top: 1.25rem;">
+        <a href="#plans" class="btn-primary">Browse Meal Plans →</a>
+        <a href="{{ url_for('cook_register') }}" class="btn-outline">🍳 Register as Cook</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">2,400+</div>
+          <div class="hero-stat-label">Verified home cooks</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">18K+</div>
+          <div class="hero-stat-label">Happy subscribers</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">40+</div>
+          <div class="hero-stat-label">Cities covered</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="food-card a">
+        <div class="food-card-img">🍛</div>
+        <div class="food-card-body">
+          <div class="food-card-name">Dal Makhani Thali</div>
+          <div class="food-card-sub">Priya's Kitchen · Hyderabad</div>
+          <div class="food-card-footer">
+            <div class="food-price">₹85/meal</div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div class="veg-dot"><span></span></div>
+              <div class="rating">★ 4.9</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card b">
+        <div class="food-card-img">🫓</div>
+        <div class="food-card-body">
+          <div class="food-card-name">South Indian Tiffin</div>
+          <div class="food-card-sub">Lakshmi Home Foods · Hyderabad</div>
+          <div class="food-card-footer">
+            <div class="food-price">₹60/meal</div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div class="veg-dot"><span></span></div>
+              <div class="rating">★ 4.8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card c">
+        <div class="food-card-img">🍗</div>
+        <div class="food-card-body">
+          <div class="food-card-name">Chicken Curry Box</div>
+          <div class="food-card-sub">Meena's Meals · Hyderabad</div>
+          <div class="food-card-footer">
+            <div class="food-price">₹110/meal</div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div class="nonveg-dot"><span></span></div>
+              <div class="rating">★ 4.7</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-card d">
+        <div class="food-card-img">🥗</div>
+        <div class="food-card-body">
+          <div class="food-card-name">Healthy Diet Tiffin</div>
+          <div class="food-card-sub">NutriCook Home · Hyderabad</div>
+          <div class="food-card-footer">
+            <div class="food-price">₹95/meal</div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div class="veg-dot"><span></span></div>
+              <div class="rating">★ 4.9</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="section-head center">
+    <div class="section-label">Simple & Fast</div>
+    <h2 class="section-title">How HomeFeast works</h2>
+    <p class="section-sub">Get your first home-cooked meal in 3 simple steps.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-icon">📍</div>
+      <div class="step-title">Find local cooks</div>
+      <div class="step-desc">Search by area or pincode to discover verified home cooks near you. Filter by cuisine, meal type, or price.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-icon">📋</div>
+      <div class="step-title">Choose a meal plan</div>
+      <div class="step-desc">Pick from daily, weekly, or monthly subscriptions. View full menus, ratings, and delivery schedules.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-icon">✅</div>
+      <div class="step-title">Subscribe & enjoy</div>
+      <div class="step-desc">Place your order. The cook accepts and confirms. Fresh meals arrive at your door every day.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <div class="step-icon">⭐</div>
+      <div class="step-title">Rate & review</div>
+      <div class="step-desc">Share your experience to help the community and reward great home cooks.</div>
+    </div>
+  </div>
+</section>
+
+<!-- COOK PROFILES -->
+<section class="cooks-section" id="cooks">
+  <div class="section-head">
+    <div class="section-label">Featured Cooks</div>
+    <h2 class="section-title">Meet your neighborhood chefs</h2>
+    <p class="section-sub">Every cook is admin-verified for hygiene, quality, and reliability.</p>
+  </div>
+  <div class="cooks-grid">
+
+    <div class="cook-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:1rem;">
+        <div class="cook-avatar" style="background:#FFE9D6;">👩‍🍳</div>
+        <div>
+          <div class="cook-name">Priya Reddy</div>
+          <div class="cook-location">📍 Banjara Hills, Hyderabad</div>
+        </div>
+      </div>
+      <div class="cook-tags">
+        <span class="tag green">Vegetarian</span>
+        <span class="tag">Andhra Cuisine</span>
+        <span class="tag">Thali</span>
+      </div>
+      <div class="cook-footer">
+        <div class="cook-plan">From <strong>₹1,800/month</strong></div>
+        <div class="rating">★ 4.9 (182 reviews)</div>
+      </div>
+    </div>
+
+    <div class="cook-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:1rem;">
+        <div class="cook-avatar" style="background:#E8F5EE;">👨‍🍳</div>
+        <div>
+          <div class="cook-name">Ramesh Kumar</div>
+          <div class="cook-location">📍 Madhapur, Hyderabad</div>
+        </div>
+      </div>
+      <div class="cook-tags">
+        <span class="tag">Non-Veg</span>
+        <span class="tag">North Indian</span>
+        <span class="tag">Lunch Box</span>
+      </div>
+      <div class="cook-footer">
+        <div class="cook-plan">From <strong>₹2,200/month</strong></div>
+        <div class="rating">★ 4.8 (140 reviews)</div>
+      </div>
+    </div>
+
+    <div class="cook-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:1rem;">
+        <div class="cook-avatar" style="background:#FCE4EC;">👩‍🍳</div>
+        <div>
+          <div class="cook-name">Sumathi Iyer</div>
+          <div class="cook-location">📍 Kukatpally, Hyderabad</div>
+        </div>
+      </div>
+      <div class="cook-tags">
+        <span class="tag green">Vegetarian</span>
+        <span class="tag">South Indian</span>
+        <span class="tag">Tiffin</span>
+      </div>
+      <div class="cook-footer">
+        <div class="cook-plan">From <strong>₹1,500/month</strong></div>
+        <div class="rating">★ 4.9 (210 reviews)</div>
+      </div>
+    </div>
+
+  </div>
+    <div style="text-align:center;margin-top:2.5rem;">
+    <a href="{{ url_for('cook_register') }}" class="btn-outline">Register as Cook</a>
+  </div>
+</section>
+
+<!-- SUBSCRIPTION PLANS -->
+<section class="plans-section" id="plans">
+  <div class="section-head center">
+    <div class="section-label">Flexible Subscriptions</div>
+    <h2 class="section-title">Choose your meal plan</h2>
+    <p class="section-sub">Simple, transparent pricing with no hidden charges. Cancel anytime.</p>
+  </div>
+  <div class="plans-grid">
+
+    <div class="plan-card">
+      <div class="plan-emoji">☀️</div>
+      <div class="plan-name">Daily</div>
+      <div class="plan-price">₹80 <span>/meal</span></div>
+      <div class="plan-desc">Pay as you go. Perfect for trying out different cooks.</div>
+      <ul class="plan-features">
+        <li>Single meal ordering</li>
+        <li>Change cook anytime</li>
+        <li>No commitment</li>
+        <li>Lunch or dinner</li>
+      </ul>
+      <button class="btn-plan">Get Started</button>
+    </div>
+
+    <div class="plan-card featured">
+      <div class="plan-featured-badge">Most Popular</div>
+      <div class="plan-emoji">📅</div>
+      <div class="plan-name">Weekly</div>
+      <div class="plan-price">₹65 <span>/meal</span></div>
+      <div class="plan-desc">7-day subscription. Save up to 20% versus daily ordering.</div>
+      <ul class="plan-features">
+        <li>14 meals (lunch + dinner)</li>
+        <li>Rotating weekly menu</li>
+        <li>Priority delivery slot</li>
+        <li>Free 1-day trial</li>
+      </ul>
+      <button class="btn-plan">Subscribe Now</button>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-emoji">🗓️</div>
+      <div class="plan-name">Monthly</div>
+      <div class="plan-price">₹55 <span>/meal</span></div>
+      <div class="plan-desc">30-day subscription. Maximum savings for regulars.</div>
+      <ul class="plan-features">
+        <li>60 meals (lunch + dinner)</li>
+        <li>Dedicated home cook</li>
+        <li>30% savings vs daily</li>
+        <li>Custom meal requests</li>
+      </ul>
+      <button class="btn-plan">Get Started</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section">
+  <div class="section-head">
+    <div class="section-label">Why HomeFeast</div>
+    <h2 class="section-title">Everything you need, nothing you don't</h2>
+  </div>
+  <div class="features-grid">
+
+    <div class="feature-item">
+      <div class="feature-icon-box saffron">✅</div>
+      <div>
+        <div class="feature-title">Admin-verified cooks</div>
+        <div class="feature-desc">Every cook is screened and approved by our team for hygiene, quality, and FSSAI compliance.</div>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-icon-box green">🥗</div>
+      <div>
+        <div class="feature-title">Veg & Non-Veg options</div>
+        <div class="feature-desc">Filter by meal type, cuisine, price, and delivery time to find exactly what you want.</div>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-icon-box saffron">📦</div>
+      <div>
+        <div class="feature-title">Flexible subscriptions</div>
+        <div class="feature-desc">Daily, weekly, or monthly plans — pause or cancel anytime, no lock-in period.</div>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-icon-box green">📱</div>
+      <div>
+        <div class="feature-title">Order tracking</div>
+        <div class="feature-desc">Track your subscription status, order history, and upcoming deliveries all in one place.</div>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-icon-box saffron">💸</div>
+      <div>
+        <div class="feature-title">Affordable pricing</div>
+        <div class="feature-desc">Meals starting at ₹55 — up to 60% cheaper than restaurant food, without compromising quality.</div>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-icon-box green">⭐</div>
+      <div>
+        <div class="feature-title">Ratings & reviews</div>
+        <div class="feature-desc">Real reviews from real subscribers help you choose the best cook for your taste.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="section-head center">
+    <div class="section-label">Real Reviews</div>
+    <h2 class="section-title">What our subscribers say</h2>
+  </div>
+  <div class="testimonials-grid">
+
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-text">"As a working professional, I was tired of ordering from Zomato every day. HomeFeast changed everything. Real home food at half the cost!"</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar" style="background:#FFE9D6;">👨</div>
+        <div>
+          <div class="testimonial-name">Arjun Mehta</div>
+          <div class="testimonial-role">Software Engineer, Hyderabad</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-text">"I'm a student living alone and managing food was so stressful. Priya Aunty's monthly tiffin feels just like home-cooked food. I'm so relieved."</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar" style="background:#E8F5EE;">👩</div>
+        <div>
+          <div class="testimonial-name">Sneha Nair</div>
+          <div class="testimonial-role">College student, Madhapur</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★☆</div>
+      <div class="testimonial-text">"My elderly mother lives alone and I was worried about her nutrition. HomeFeast connects her with a wonderful cook who delivers fresh food daily."</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar" style="background:#FCE4EC;">👨</div>
+        <div>
+          <div class="testimonial-name">Vikram Rao</div>
+          <div class="testimonial-role">NRI, son of subscriber</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to eat like you're home?</h2>
+  <p>Join thousands of happy subscribers enjoying fresh, affordable home-cooked meals every day.</p>
+  <div class="cta-actions">
+    <a href="{{ url_for('dashboard') }}" class="btn-cta-white">Find cooks near me →</a>
+    <a href="{{ url_for('dashboard') }}" class="btn-cta-ghost">Register as a Cook</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="nav-logo" href="{{ url_for('home') }}" style="font-size:1.25rem;">🍱 HomeFeast<span class="dot">.</span></a>
+      <p>Connecting home cooks with people who crave healthy, affordable, homemade meals every day.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Customers</h4>
+      <ul>
+        <li><a href="#cooks">Browse Cooks</a></li>
+        <li><a href="#plans">Meal Plans</a></li>
+        <li><a href="#how">How it Works</a></li>
+        <li><a href="{{ url_for('dashboard') }}">My Account</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>For Cooks</h4>
+      <ul>
+        <li><a href="{{ url_for('dashboard') }}">Register as Cook</a></li>
+        <li><a href="{{ url_for('dashboard') }}">Cook Dashboard</a></li>
+        <li><a href="#">Earnings Guide</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 HomeFeast. All rights reserved.</span>
+    <span>Made with ❤️ for home food lovers</span>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  const searchInput = document.querySelector('.search-bar input');
+  const searchBtn = document.querySelector('.search-bar button');
+  searchBtn.addEventListener('click', () => {
+    if (searchInput.value.trim()) {
+      document.querySelector('#cooks').scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') searchBtn.click();
+  });
+</script>
+</body>
+</html>
