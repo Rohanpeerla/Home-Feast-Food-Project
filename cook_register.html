@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Register as Cook | HomeFeast{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="form-block">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Register as Cook</h1>
+        <p class="page-subtitle">Share your cuisine, service area, and delivery times. New registrations stay pending until approved by admin.</p>
+      </div>
+    </div>
+
+    <div class="form-card">
+      {% for category, message in get_flashed_messages(with_categories=true) %}
+        <div class="alert {{ category }}">{{ message }}</div>
+      {% endfor %}
+      <form method="post">
+        <div class="form-grid">
+          <div class="field-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" required>
+          </div>
+          <div class="field-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required>
+          </div>
+          <div class="field-group">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone">
+          </div>
+          <div class="field-group">
+            <label for="location">Location</label>
+            <input id="location" name="location">
+          </div>
+          <div class="field-group">
+            <label for="cuisines">Cuisines</label>
+            <input id="cuisines" name="cuisines" placeholder="Andhra, South Indian">
+          </div>
+          <div class="field-group">
+            <label for="meal_types">Meal Types</label>
+            <input id="meal_types" name="meal_types" placeholder="Veg, Non-Veg">
+          </div>
+          <div class="field-group">
+            <label for="price_from">Starting Price (INR)</label>
+            <input id="price_from" name="price_from" type="number" min="0">
+          </div>
+          <div class="field-group">
+            <label for="service_area">Service Area</label>
+            <input id="service_area" name="service_area" placeholder="Example: Banjara Hills, Jubilee Hills">
+          </div>
+          <div class="field-group">
+            <label for="delivery_times">Delivery Timings</label>
+            <input id="delivery_times" name="delivery_times" placeholder="Example: Lunch 12 PM - 2 PM">
+          </div>
+          <div class="field-group">
+            <label for="plan_notes">Plan Notes</label>
+            <input id="plan_notes" name="plan_notes" placeholder="Example: Daily, weekly, monthly plans">
+          </div>
+          <div class="field-group">
+            <label>Latitude (optional)</label>
+            <input name="lat" id="latInput">
+          </div>
+          <div class="field-group">
+            <label>Longitude (optional)</label>
+            <input name="lon" id="lonInput">
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="fillCoords" class="btn-secondary">Use my browser location</button>
+          <button type="submit" class="btn-primary">Register</button>
+        </div>
+        <div class="field-group">
+          <label for="description">Description</label>
+          <textarea id="description" name="description"></textarea>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.getElementById('fillCoords').addEventListener('click', function(){
+    if(!navigator.geolocation){ alert('Geolocation not supported'); return; }
+    this.disabled = true; this.textContent = 'Locating...';
+    navigator.geolocation.getCurrentPosition(function(pos){
+      document.getElementById('latInput').value = pos.coords.latitude;
+      document.getElementById('lonInput').value = pos.coords.longitude;
+    }, function(){
+      alert('Unable to get location');
+      const btn = document.getElementById('fillCoords');
+      btn.disabled = false;
+      btn.textContent = 'Use my browser location';
+    });
+  });
+</script>
+{% endblock %}

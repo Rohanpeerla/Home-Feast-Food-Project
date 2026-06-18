@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Register | HomeFeast{% endblock %}
+{% block content %}
+<section class="auth-shell">
+  <div class="auth-card card">
+    <div class="auth-brand">
+      <div class="auth-brand-icon">🍱</div>
+      <div>HomeFeast Register</div>
+    </div>
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+      <div class="alert {{ category }}">{{ message }}</div>
+    {% endfor %}
+    <form method="post">
+      <div class="field-group">
+        <label for="name">Full name</label>
+        <input id="name" name="name" type="text" required placeholder="Your name">
+      </div>
+      <div class="field-group">
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" required placeholder="you@example.com">
+      </div>
+      <div class="form-grid">
+        <div class="field-group">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" required placeholder="Choose a password">
+        </div>
+        <div class="field-group">
+          <label for="confirm_password">Confirm password</label>
+          <input id="confirm_password" name="confirm_password" type="password" required placeholder="Confirm password">
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="phone">Phone number</label>
+        <input id="phone" name="phone" type="tel" placeholder="+91 98765 43210">
+      </div>
+      <div class="field-group">
+        <label for="address">Delivery address</label>
+        <input id="address" name="address" type="text" placeholder="Your address">
+      </div>
+      <div class="form-grid">
+        <div class="field-group">
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender" required>
+            <option value="" selected disabled>Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="meal_pref">Meal preference</label>
+          <select id="meal_pref" name="meal_pref">
+            <option>Vegetarian</option>
+            <option>Non-Vegetarian</option>
+            <option>Both</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="cuisine_pref">Cuisine preference</label>
+          <select id="cuisine_pref" name="cuisine_pref">
+            <option>South Indian</option>
+            <option>North Indian</option>
+            <option>Any</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">Create account</button>
+      </div>
+    </form>
+    <p class="auth-note">Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+  </div>
+</section>
+{% endblock %}
